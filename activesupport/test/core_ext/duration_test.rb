@@ -20,6 +20,17 @@ class DurationTest < ActiveSupport::TestCase
     assert !d.is_a?(k)
   end
 
+  def test_load
+    assert ActiveSupport::Duration.load(1) == 1.seconds
+    assert ActiveSupport::Duration.load(1, :minutes) == 1.minutes
+    assert ActiveSupport::Duration.load(1, :hours) == 1.hours
+  end
+
+  def test_dump
+    assert ActiveSupport::Duration.dump(1.seconds) == 1
+    assert ActiveSupport::Duration.dump(1.hours) == 1.hours.to_i
+  end
+
   def test_instance_of
     assert 1.minute.instance_of?(1.class)
     assert 2.days.instance_of?(ActiveSupport::Duration)

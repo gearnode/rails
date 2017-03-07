@@ -42,6 +42,14 @@ module ActiveSupport
         new(calculate_total_seconds(parts), parts)
       end
 
+      def load(int, unit = :seconds)
+        public_send(unit, int)
+      end
+
+      def dump(duration)
+        duration.to_i
+      end
+
       def ===(other) #:nodoc:
         other.is_a?(Duration)
       rescue ::NoMethodError
